@@ -8,15 +8,16 @@ export default function SignUp() {
   const { isSignedIn } = useAuth();
   const router = useRouter();
 
-  const { firstName, setFirstName } = useState("");
-  const { lastName, setLastName } = useState("");
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
-  const { code, setCode } = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
 
-
+const isLoading = fetchStatus === "fetching";
 
   const onSignUpPress = async () => {
+    console.log("signup function called....")
     const { error } = await signUp.password({
       emailAddress: email,
       password,
@@ -52,7 +53,7 @@ export default function SignUp() {
     }
   };
 
-  const isLoading = fetchStatus === "fetching";
+
 
   if (signUp.status === "complete" || isSignedIn) {
     return null;
@@ -193,6 +194,7 @@ export default function SignUp() {
             <Text className="text-blue-500 font-semibold mt-4">Sign In</Text>
           </Link>
         </View>
+        <View nativeID="clerk-captcha"/>
       </View>
     </ScrollView>
   );
