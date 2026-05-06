@@ -1,10 +1,12 @@
 // import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
-import { Tabs } from "expo-router";
+import { useUserStore } from "@/store/userStore";
 import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
 export default function TabLayout() {
+  const isAdmin = useUserStore((state) => state.isAdmin);
   return (
-     <Tabs
+    <Tabs
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "#000",
@@ -33,6 +35,21 @@ export default function TabLayout() {
           ),
         }}
       />
+      {isAdmin && (
+      
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: "Add Property",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add-circle-outline" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
+
+      
+      
 
       <Tabs.Screen
         name="saved"
